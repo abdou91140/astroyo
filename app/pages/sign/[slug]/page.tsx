@@ -1,18 +1,24 @@
 "use client";
 
-import React from 'react'
-import {useSignContext} from "@/hooks/signContext";
+import React from 'react';
+import { useSignContext } from "@/hooks/signContext";
 
-function SignDetails({params}: {params: {slug: number}}) {
-
-    const {signList} = useSignContext(); // Get the signList from context
-
-    const sign = signList.find(sign => sign.id === parseInt(params.slug));
-    return (
-        <div>
-            <h1>{sign && sign.name} </h1>
-        </div>
-    )
+interface Params {
+    params: {
+        slug: string;
+    };
 }
 
-export default SignDetails
+function SignDetails({ params }: Params) {
+    const { signList } = useSignContext(); // Get the signList from context
+
+    const sign = signList.find(sign => sign.id === parseInt(params.slug, 10));
+
+    return (
+        <div>
+            <h1>{sign?.name}</h1>
+        </div>
+    );
+}
+
+export default SignDetails;
